@@ -1,0 +1,27 @@
+const axios = require('axios');
+const express = require('express');
+const router = express.Router();
+const conversion_xy = require('../xy_conversion.js');
+
+// api code
+router.get('/get_weather/:lat/:lon/:date/:time', function(request,response){
+	console.log('loading page');
+	var lat = request.params.lat;
+	var lon = request.params.lon;
+	var date = request.params.date;
+	var time = request.params.time;
+	var converted = conversion_xy.dfs_xy_conv("toXY",lat,lon);
+	var nx = converted.x;
+	var ny = converted.y;
+	var api_key = 'wqor8jGxnLcBmwjji2TSh2RFSm%2FcARGwz0D%2FA09jRuBuB4AfiCp5yefWhC1glP1oVRDxITi870hYRDwoUa2uIg%3D%3D';
+	var api_url = `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${api_key}&numOfRows=10&pageNo=1&dataType=JSON&base_date=${date}&base_time=${time}&nx=${nx}&ny=${ny}`;
+	axios.get(api_url).then(function(res){
+		console.log(res.data.response.body);
+		response.send(res.data.response.body);
+		//console.log(resp);
+		//response.send(resp);
+	});
+	//response.send(api_url);
+});
+
+module.exports = router;

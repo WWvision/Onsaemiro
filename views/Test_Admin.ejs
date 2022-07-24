@@ -1,0 +1,39 @@
+<html>
+<head>
+</head>
+<body>
+	<div>Num UsrCode Name ImpCode Stat Response</div>	
+	<thead>
+	     <tr>
+		<th>Name</th>
+		<th>ImpCode</th>
+		<th>UsrCode</th>
+		<th>Status_1</th>
+		<th>Status_2</th>
+		<th>Status_3</th>
+		<th>Response</th>
+	    </tr>
+	</thead>
+
+	<tbody>
+	   <br>
+	   <br>
+	   <% for(var i=0;i<rows.length;i++){ %>
+		<br>
+		<tr>
+			<td><%= rows[i].Name %></td>
+			<td><%= rows[i].UsrCode %></td>
+			<% if(rows[i].ImCode != 0){ %>
+				<td>111</td>
+			<% } %>
+			<td><%= rows[i].Status_1 %></td>
+			<td><%= rows[i].Status_2 %></td>
+			<td><%= rows[i].Status_3 %></td>
+			<td><%= rows[i].Response %></td>
+		</tr>
+	   <% }%>
+	</tbody>
+		
+	   	
+</body>
+</html>

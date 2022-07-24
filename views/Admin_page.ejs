@@ -1,0 +1,319 @@
+<html lang="ko"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="refresh" content="30" />
+	<title>온새미로 관리자 페이지</title>
+	<link rel="stylesheet" type="text/css" href="css/app.css" >
+</head><body>
+	<div class="wrapper">
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle show" href="#" id="alertsDropdown" data-bs-toggle="dropdown" aria-expanded="true">
+								<div class="position-relative">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell align-middle">
+									<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+									<% var countAL = 0;
+									   for(var k=0;k<rows.length;k++){
+										StatVAL = rows[k].Status_4;
+										if(StatVAL == 99 || StatVAL == 61 || StatVAL == 62 || StatVAL == 63 || StatVAL == 64){
+											countAL++;
+										}
+									   } %>
+									<span class="indicator"><%= countAL %></span>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0 show" aria-labelledby="alertsDropdown" data-bs-popper="none">
+								<div class="dropdown-menu-header">새로운 알림</div>
+								<div class="list-group">
+								<!-- 오른쪽 상위 알림 메세지 칸  LANG="en_US.UTF-8"-->
+									<!-- 응급 아이콘 -->
+								<% for(var k=0;k<rows.length;k++){ 
+									if(rows[k].Status_4 == 99){ %>
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle text-danger">
+												<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+											</div>
+											<div class="col-10">
+												
+												<div class="text-dark"><%= rows[k].Name %>  사용자 응급상황 발생</div>
+												<!-- div class="text-muted small mt-1">15초전</div -->
+											</div>
+										</div>
+									</a>
+								<% } else if ( rows[k].Status_4 == 61 || rows[k].Status_4 == 62 || rows[k].Status_4 == 63 || rows[k].Status_4 == 64 ){ %>
+									<!-- 요청사항-->
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell text-warning">
+												<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+											</div>
+											<div class="col-10">
+												
+												<div class="text-dark">새로운 요청사항</div>
+												<% if(rows[k].Status_4 == 61){ %>
+													<div class="text-muted small mt-1"><%= rows[k].Name %> 사용자가 상담 요청하였습니다.</div>
+												<% } else if(rows[k].Status_4 == 62){ %>
+													<div class="text-muted small mt-1"><%= rows[k].Name %> 사용자가 식재료가 부족하다고 응답했습니다.</div>
+												<% } else if(rows[k].Status_4 == 63){ %>
+													<div class="text-muted small mt-1"><%= rows[k].Name %> 사용자가 집 수리가 필요하다고 응답했습니다.</div>
+												<% } else if(rows[k].Status_4 == 64){ %>
+													<div class="text-muted small mt-1"><%= rows[k].Name %> 사용자가 집 청소가 필요하다고 응답했습니다.</div>
+												<% } %>	
+												<!-- div class="text-muted small mt-1">30분 전</div -->
+											</div>
+										</div>
+									</a>
+								<%	}} %>
+									<!-- 사용자 추가 -->
+									<!-- a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus text-success">
+												<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+											</div>
+											<div class="col-10">
+												<div class="text-dark">새로운 사용자 추가!</div>
+												<div class="text-muted small mt-1"><%= rows[11].Name %>  사용자가 새로 등록되었습니다.</div>
+												<div class="text-muted small mt-1">1시간 전</div>
+											</div>
+										</div>
+									</a -->
+								</div>	
+							</div>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings align-middle">
+				<circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              </a>
+				<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="text-dark">이루다 관리자</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="pages-profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user align-middle me-1">
+								<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>관리자 정보</a>
+								<a class="dropdown-item" href="#">로그아웃</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+					<h1 class="h3 mb-3"><strong>사용자 관리 정보</strong>온새미로 복지관</h1>
+					<div class="row">
+						<div class="col-xl-6 col-xxl-5 d-flex">
+							<div class="w-100">
+								<div class="row">
+									<!-- 숫자 박스 왼쪽 -->
+									<div class="col-sm-6">
+									
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col mt-0">
+														<h5 class="card-title">사용자 수</h5>
+													</div>
+													<div class="col-auto">
+														<div class="stat text-primary">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus text-success">
+															<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle></svg>
+														</div>
+													</div>
+												</div>
+												<h1 class="mt-1 mb-3"><%= rows.length %>명</h1>		
+											</div>
+										</div>										
+									</div>
+									
+									<!-- 숫자 박스 오른쪽 -->
+									<div class="col-sm-6">
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col mt-0">
+														<h5 class="card-title">알림 갯수</h5>
+													</div>
+													<div class="col-auto">
+														<div class="stat text-primary">
+															
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell align-middle">
+									<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
+													</div>
+												</div>
+												<%var count = 0; 
+												  for(var j=0;j<rows.length;j++){
+													if(rows[j].Status_4 != 0 && rows[j].Status_4 != 61 && rows[j].Status_4 != 62 && rows[j].Status_4 != 63 && rows[j].Status_4 != 64){
+														count++;
+													}
+												} %>
+												<h1 class="mt-1 mb-3"><%= count %>개</h1>										
+											</div>
+										</div>									
+									</div>
+								</div>
+							</div>
+						</div>						
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+									<h5 class="card-title mb-0">관심필요</h5>
+								</div>
+								<!-- Function -->
+								<%function Status_Level(score){ 
+									if(score >= 7){ %>
+										<td><span class="badge bg-success">양호</span></td>
+								<%	} else if(score < 7 && score >= 4){ %>
+										<td><span class="badge bg-warning">주의</span></td>
+								<%	} else if(score < 4){ %>
+										<td><span class="badge bg-danger">위험</span></td>
+								<%	}
+								}
+								%>
+								<div></div>
+								<% function Status_Imp(impcode){
+									if(impcode == "1000"){ %>
+										<td>지체장애</td>
+								<%	} else if(impcode == "2000"){ %>
+										<td>청각장애</td>
+								<%	} else if(impcode == "3000"){ %>
+										<td>지적장애</td>
+								<%	} else if(impcode == "4000"){ %>
+										<td>시각장애</td>
+								<%	}
+								}
+								%>
+								<script>	
+									function Emer(){
+										alert("Emergency Alarm!!!");
+									}
+								</script>
+								<%function Status_message(msg){
+									if(msg == 1){ %>
+										<td>건강 상태 이상</td>
+								<%	} else if(msg == 2){ %>
+										<td>활동 징후 나쁨</td>
+								<%	} else if(msg == 3){ %>
+										<td>활동 징후 주의</td>
+								<%	} else if(msg == 4){ %>
+										<td>주거환경 상태 나쁨</td>
+								<%	} else if(msg == 5){ %>
+										<td>주거환경 상태 주의</td>
+								<%	} else if(msg == 6){ %>
+										<td>부정적 상태</td>
+								<%	} else if(msg == 7){ %>
+										<td>무응답</td>
+								<%	} else if(msg == 91){ %>
+										<td>머리 아픔 위험</td>
+								<%	} else if(msg == 92){ %>
+										<td>몸 아픔 주의</td>
+								<%	} else if(msg == 93){ %>
+										<td>팔 아픔 주의</td>
+								<%	} else if(msg == 94){ %>
+										<td>다리 아픔 주의</td>
+								<%	} else if(msg == 95){ %>
+										<td>고혈압 알림</td>
+								<%	} else if(msg == 96){ %>
+										<td>혈당 수치 위험</td>
+								<%	} 
+								}
+								%>
+								<!-- Notion! List -->
+								<table class="table table-hover my-0">
+									<thead>
+										<tr>
+											<th>이름</th>
+											<th>장애유형</th>
+											<th>기분상태</th>
+											<th>활동상태</th>
+											<th>환경상태</th>
+											<th>응답률</th>
+											<th>문제</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% for(var i=0;i<rows.length; i++){ %>
+										<% 	if(rows[i].Status_4 == 99){ %>
+												<td><%= rows[i].Name %></td>
+												<% Status_Imp(rows[i].ImpCode) ; %><script></script>
+												<% Status_Level(1); %><script></script>
+												<% Status_Level(1); %><script></script>
+												<% Status_Level(1); %><script></script>
+												<% var Hour = new Date().getHours() + 9;
+												   var Min = new Date().getMinutes();
+												   var Second = new Date().getSeconds();	
+												   if(Hour >= 24){
+													Hour = Hour - 24;		
+												   }
+												%>
+												<td><%= Hour + ":" + Min + ":" + Second; %></td>
+												<td>응급상황발생</td>
+										<% } %>
+										<% 	if(rows[i].Status_4 != 0 && rows[i].Status_4 != 99 && rows[i].Status_4 != 61 && rows[i].Status_4 != 62
+												&& rows[i].Status_4 != 63 && rows[i].Status_4 != 64){%>
+											<tr>
+												<td><%= rows[i].Name %></td>
+												<% Status_Imp(rows[i].ImpCode); %><script></script>
+												<% Status_Level(rows[i].Status_1); %><script></script>
+												<% Status_Level(rows[i].Status_2); %><script></script>
+												<% Status_Level(rows[i].Status_3); %><script></script>
+												<td><%= rows[i].Response %></td>
+												<% Status_message(rows[i].Status_4); %>
+											</tr>
+										<%	}
+										} %>
+									</tbody><tr>
+								</table>
+							</div>
+						</div>
+						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+									<h5 class="card-title mb-0">사용자 리스트</h5>
+								</div>
+								<!-- Main List -->
+								<table class="table table-hover my-0">
+									<thead>
+										<tr>
+											<th>이름</th>
+											<th>장애유형</th>
+											<th>사용자코드</th>
+											<th>기분상태</th>
+											<th>활동상태</th>
+											<th>환경상태</th>
+											<th>응답률</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% for(var i=0;i<rows.length; i++){ %>
+											<tr>
+												<td><%= rows[i].Name %></td>
+												<% Status_Imp(rows[i].ImpCode); %><script></script>
+												<td><%= rows[i].UsrCode %></td>
+												<% Status_Level(rows[i].Status_1); %><script></script>
+												<% Status_Level(rows[i].Status_2); %><script></script>
+												<% Status_Level(rows[i].Status_3); %><script></script>
+												<td><%= rows[i].Response %></td>
+											</tr>
+										<% } %>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
+	<script src="javascripts/app.js"></script>
+<div class="jvm-tooltip"></div></body></html>
