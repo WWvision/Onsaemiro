@@ -6,15 +6,15 @@
 
 
 관리자 웹
-1. /views/Admin_page.ejs 
-2. /public/css/app.css
-3. /public/stylesheets/app.css
+- /views/Admin_page.ejs 
+- /public/css/app.css
+- /public/stylesheets/app.css
 
 
 
 서버 로직
-1. app.js
-2. package.json
-3. /routes/Update-UsrSleep.js
-4. /routes/Update-UsrStatus.js
-5. /routes/Read-UsrData.js
+- app.js
+- package.json
+- /routes/Update-UsrSleep.js
+- /routes/Update-UsrStatus.js
+- /routes/Read-UsrData.js
